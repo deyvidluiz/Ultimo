@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="anexos/favicon.jpg">
+    <title>Biofarm</title>
+
+    <!-- CSS -->
+    <style>
+        /* Reset e Configurações Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2e5d31;
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 50%, #a5d6a7 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header e Navegação */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 25px rgba(129, 199, 132, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #81c784;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            min-width: 150%;
+            min-height: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #2e5d31;
+            font-weight: 600;
+            padding: 0.8rem 1.8rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 1.05rem;
+        }
+
+        .nav-menu a:hover {
+            background: linear-gradient(45deg, #81c784, #a5d6a7);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(129, 199, 132, 0.4);
+            border-color: #66bb6a;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #4caf50;
+            margin: 4px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Seções Principais */
+        main {
+            margin-top: 100px;
+        }
+
+        .section {
+            padding: 5rem 0;
+            display: none;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.2rem;
+            margin-bottom: 4rem;
+            color: #2e5d31;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #81c784, #a5d6a7);
+            border-radius: 2px;
+        }
+
+        /* Página Inicial */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: #2e5d31;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            color: #1b5e20;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            color: #388e3c;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .company-overview {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 4rem;
+            margin: 4rem 0;
+            border: 2px solid rgba(129, 199, 132, 0.3);
+            box-shadow: 0 15px 40px rgba(129, 199, 132, 0.2);
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .overview-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(232, 245, 232, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(129, 199, 132, 0.3);
+        }
+
+        .overview-item .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .overview-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .overview-item p {
+            color: #4a4a4a;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #66bb6a, #81c784);
+            color: white;
+            padding: 1.3rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2.5rem;
+            box-shadow: 0 10px 30px rgba(129, 199, 132, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(129, 199, 132, 0.5);
+            background: linear-gradient(45deg, #4caf50, #66bb6a);
+        }
+
+        /* Nossa Empresa - Texto de Qualidades */
+        .company-qualities {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 2px solid rgba(129, 199, 132, 0.3);
+            box-shadow: 0 10px 30px rgba(129, 199, 132, 0.15);
+        }
+
+        .company-qualities h3 {
+            font-size: 2.2rem;
+            color: #2e7d32;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .qualities-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #4a4a4a;
+            text-align: justify;
+            margin-bottom: 2rem;
+        }
+
+        .qualities-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quality-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(232, 245, 232, 0.5);
+            border-radius: 15px;
+            border-left: 4px solid #81c784;
+        }
+
+        .quality-item .icon {
+            font-size: 1.8rem;
+        }
+
+        .quality-item span {
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        /* Cards da Nossa Empresa */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(129, 199, 132, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(129, 199, 132, 0.3);
+            border-color: #81c784;
+        }
+
+        .card-image {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 50%, #81c784 100%);
+            display: flex;
+            align-items: top;
+            justify-content: top;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(1px);
+        }
+
+        .card-content {
+            padding: 2.5rem;
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 1.2rem;
+            color: #2e7d32;
+        }
+
+        .card-description {
+            color: #4a4a4a;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+
+
+        /* Formulário de Cadastro */
+        .form-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: white;
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(129, 199, 132, 0.25);
+            border: 3px solid #c8e6c9;
+        }
+
+        .form-title {
+            text-align: center;
+            color: #2e7d32;
+            font-size: 2.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 600;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: #4a4a4a;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 2.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: #2e7d32;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #81c784;
+            background: white;
+            box-shadow: 0 0 20px rgba(129, 199, 132, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #66bb6a, #81c784);
+            color: white;
+            padding: 1.3rem 2.5rem;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(129, 199, 132, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(129, 199, 132, 0.5);
+            background: linear-gradient(45deg, #4caf50, #66bb6a);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 100px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 30px rgba(129, 199, 132, 0.3);
+                padding: 2.5rem 0;
+                border-top: 3px solid #81c784;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company-overview,
+            .company-qualities {
+                padding: 2.5rem;
+            }
+
+            .form-container {
+                padding: 2.5rem;
+                margin: 0 1rem;
+            }
+
+            .overview-grid,
+            .qualities-highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo"><img src="anexos/logo.png"></div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showSection('home')">Início</a></li>
+                <li><a href="#" onclick="showSection('empresa')">Nossa Empresa</a></li>
+                <li><a href="#" onclick="showSection('cadastro')">Cadastrar</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Página Inicial -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>Biofarm</h1>
+                <p class="subtitle">Transformando o futuro através de tecnologia sustentável e soluções inovadoras para
+                    um mundo mais verde</p>
+
+                <div class="company-overview">
+                    <h2 style="color: #2e7d32; margin-bottom: 2.5rem; font-size: 2.5rem; text-align: center;">
+                        Curiosidades</h2>
+                    <div class="overview-grid">
+                        <div class="overview-item">
+                            <span class="icon">🌱</span>
+                            <h3>Sustentabilidade</h3>
+                            <p><strong>Bioestimulantes à base de algas marinhas:</strong><br>
+                                As algas são a base do ecossistema marinho e extremamente importantes para o planeta:
+                                55% do oxigênio é gerado por elas. Além disso, são vegetais extremamente ricos em
+                                nutrientes: cálcio, magnésio, fósforo e ferro, além de vitaminas e minerais.<br>
+
+                                <br>Por conta de suas propriedades, seus extratos contribuem para a formação do sistema
+                                de raízes e para a melhora da resistência das plantas. Elas também são um ingrediente
+                                excelente para a produção de biofertilizantes, porque são fáceis de cultivar, têm
+                                processo de criação contínuo e trazem diversos benefícios para as culturas e o meio
+                                ambiente em seu entorno.
+                            </p>
+                        </div>
+
+                        <div class="overview-item">
+                            <span class="icon">💡</span>
+                            <h3>Inovação</h3>
+                            <p><br>Os drones estão se tornando ferramentas indispensáveis na agricultura moderna,
+                                promovendo uma produção mais eficiente e sustentável. Com suas diversas aplicações e
+                                benefícios, essa tecnologia está transformando a forma como os agricultores gerenciam
+                                suas lavouras e recursos. Se você ainda não considerou o uso de drones na sua prática
+                                agrícola, agora é o momento de explorar essa inovação. Veja algumas vantagens do uso
+                                desse equipamento:<br>
+
+                                <br><strong>Eficiência Operacional:</strong> Drones cobrem grandes áreas rapidamente,
+                                permitindo um monitoramento contínuo e em tempo real das culturas.<br>
+
+                                <br><strong>Redução de Custos:</strong> A aplicação precisa de insumos e a identificação
+                                precoce de problemas ajudam a economizar recursos e reduzir custos operacionais.<br>
+
+                                <br><strong>Acesso a Áreas Difíceis:</strong> Drones podem operar em terrenos
+                                acidentados ou de difícil acesso, onde máquinas tradicionais não conseguem chegar
+                            </p>
+                        </div>
+
+                        <div class="overview-item">
+                            <span class="icon">🤝</span>
+                            <h3>Compromisso</h3>
+                            <p>Nosso compromisso vai além dos negócios - trabalhamos para construir um futuro melhor
+                                para as próximas gerações.</p>
+                        </div>
+                        <div class="overview-item">
+                            <span class="icon">🌟</span>
+                            <h3>Qualidade</h3>
+                            <p>Parceria sólida e duradoura com nossos clientes. Excelência em cada projeto que
+                                desenvolvemos!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="cta-button" onclick="showSection('empresa')">Conheça Nossa Empresa</a>
+            </div>
+        </section>
+
+        <!-- Nossa Empresa -->
+        <section id="empresa" class="section">
+            <h2 class="section-title">Nossa Empresa</h2>
+
+            <!-- Texto sobre as qualidades da empresa -->
+            <div class="company-qualities">
+                <h3><strong>Biofarm: Revolucionando a Agricultura com Biofertilizantes de Microalgas Marinhas,
+                        Tecnologia de Drones e Análise de Solo Personalizada</strong></h3>
+                <p class="qualities-text">
+
+                    <br>Somos uma empresa que produz biofertilizantes a partir de algas e microalgas, aplicados por
+                    pulverização, gerando benefícios ambientais, econômicos e agrícolas. Reduz o uso de químicos e a
+                    poluição, captura CO₂ e recupera a fertilidade do solo de forma sustentável.<br>
+
+                    <br> Oferece baixo custo de produção, aumenta a produtividade, reduz a dependência de importações e
+                    agrega valor ecológico ao produto. Para o agricultor, fornece nutrientes completos, melhora a
+                    retenção de água, fortalece as plantas contra pragas e garante rápida absorção graças à aplicação
+                    foliar.<br>
+
+                    <br>A Biofarm surge como uma força inovadora no setor agrícola, dedicada a impulsionar a
+                    produtividade e a sustentabilidade das fazendas através de soluções biotecnológicas de ponta. Nossa
+                    especialidade reside na criação de biofertilizantes de alta performance, desenvolvidos a partir de
+                    microalgas marinhas cuidadosamente selecionadas. Estes biofertilizantes são ricos em nutrientes
+                    essenciais e compostos bioativos que promovem o crescimento saudável das plantas, fortalecem sua
+                    resistência a pragas e doenças, e melhoram a qualidade do solo.<br>
+
+                    <br>Compreendemos que a aplicação eficiente é tão crucial quanto a qualidade do produto. Por isso, a
+                    Biofarm também se destaca por oferecer serviços de aplicação de nossos biofertilizantes utilizando
+                    tecnologia de drones. Essa abordagem moderna garante uma distribuição uniforme e precisa do
+                    fertilizante diretamente nas lavouras, otimizando a absorção pelas plantas e minimizando o
+                    desperdício. A aplicação por drone permite alcançar áreas de difícil acesso, reduzir a compactação
+                    do solo e agilizar todo o processo, resultando em economia de tempo e recursos para o produtor.<br>
+
+                    <br><strong>Nosso compromisso com o sucesso do agricultor começa antes mesmo da aplicação.</strong>
+                    Para garantir que cada intervenção seja a mais eficaz possível, a Biofarm oferece <strong> análises
+                        de solo detalhadas</strong>. Através de testes precisos, compreendemos as necessidades
+                    específicas de cada lavoura, permitindo a personalização das formulações de biofertilizantes e a
+                    otimização das estratégias de manejo. Assim, garantimos que os nutrientes cheguem exatamente onde
+                    são mais necessários, maximizando o retorno sobre o investimento para o agricultor e promovendo um
+                    solo mais saudável e produtivo a longo prazo.<br>
+                </p>
+                <p class="qualities-text">
+                    Nosso diferencial está na capacidade de transformar desafios ambientais em oportunidades de negócio,
+                    criando valor tanto
+                    para nossos clientes quanto para a sociedade. Trabalhamos com uma equipe multidisciplinar de
+                    especialistas que compartilham
+                    nossa paixão por um mundo mais sustentável e nossa dedicação à excelência em cada projeto.
+                </p>
+
+                <div class="qualities-highlights">
+                    <div class="quality-item">
+                        <span class="icon">✅</span>
+                        <span>Certificação ISO 14001</span>
+                    </div>
+                    <div class="quality-item">
+                        <span class="icon">🎯</span>
+                        <span>98% de Satisfação dos Clientes</span>
+                    </div>
+                    <div class="quality-item">
+                        <span class="icon">🌍</span>
+                        <span>Projetos em 15+ Países</span>
+                    </div>
+                    <div class="quality-item">
+                        <span class="icon">⚡</span>
+                        <span>Redução de 40% no Consumo Energético</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards da empresa -->
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="anexos/geovana.jpg" alt="imagem da integrante Geovanna">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Geovanna de Jesus</h3>
+                        <p class="card-description">
+                        <ul>
+                            <li>Fundadora da empresa.</li>
+                            <li>Técnico Agropecuária.</li>
+                            <li>Especialista em Agricultura de Precisão .</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <img src="anexos/giovana.jpg" alt="imagem da integrante Giovanna">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Giovanna Silva</h3>
+                        <p class="card-description">
+                        <ul>
+                            <li>Fundadora da empresa.</li>
+                            <li>Técnico Agropecuária.</li>
+                            <li>Engenheira Agrônoma.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <img src="anexos/layla.jpg" alt="imagem da integrante Layla">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Layla Rúbia</h3>
+                        <p class="card-description">
+                        <ul>
+                            <li>Fundadora da empresa.</li>
+                            <li>Técnico Agropecuária</li>
+                            <li>Piloto de drones.</li>
+                            <li>Bacharel em Ciências e Tecnologia.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">
+                        <img src="anexos/iani.jpg" alt="imagem da integrante Yani">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Yani Novais</h3>
+                        <p class="card-description">
+                        <ul>
+                            <li>Fundadora da empresa.</li>
+                            <li>Técnico Agropecuária</li>
+                            <li>Bacharel em Biologia Marinha.</li>
+                            <li>Bacharel em Ciências Biológicas.</li>
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cadastro -->
+        <section id="cadastro" class="section">
+            <h2 class="section-title">Cadastro</h2>
+            <div class="form-container">
+                <h3 class="form-title">Junte-se à Revolução Verde</h3>
+                <p class="form-subtitle">Faça parte da nossa comunidade de inovadores sustentáveis e receba as últimas
+                    novidades sobre tecnologias verdes e oportunidades de parceria.</p>
+
+                <form id="cadastroForm">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="empresa">Empresa/Organização</label>
+                        <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa ou organização">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interesse">Área de Interesse</label>
+                        <select id="interesse" name="interesse" required>
+                            <option value="">Selecione sua área de interesse</option>
+                            <option value="tecnologia-verde">Tecnologia Verde</option>
+                            <option value="energia-renovavel">Energia Renovável</option>
+                            <option value="consultoria-ambiental">Consultoria Ambiental</option>
+                            <option value="sustentabilidade-empresarial">Sustentabilidade Empresarial</option>
+                            <option value="inovacao-sustentavel">Inovação Sustentável</option>
+                            <option value="parcerias-estrategicas">Parcerias Estratégicas</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem"
+                            placeholder="Conte-nos sobre seus projetos sustentáveis ou como podemos colaborar para um futuro mais verde..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Enviar Cadastro</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Variáveis globais
+        let currentSection = 'home';
+        let isMenuOpen = false;
+
+        // Função para mostrar seções
+        function showSection(sectionName) {
+            // Esconder todas as seções
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar a seção selecionada
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                currentSection = sectionName;
+            }
+
+            // Fechar menu mobile se estiver aberto
+            closeMenu();
+
+            // Scroll suave para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Função para toggle do menu mobile
+        function toggleMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+
+            isMenuOpen = !isMenuOpen;
+            navMenu.classList.toggle('active');
+
+            // Animação do hambúrguer
+            animateMenuIcon(isMenuOpen);
+        }
+
+        // Função para fechar o menu
+        function closeMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.remove('active');
+            isMenuOpen = false;
+            animateMenuIcon(false);
+        }
+
+        // Função para animar o ícone do menu
+        function animateMenuIcon(isOpen) {
+            const spans = document.querySelectorAll('.menu-toggle span');
+
+            if (isOpen) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        }
+
+
+
+        // Função para validar email
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Função para validar telefone
+        function validatePhone(phone) {
+            const phoneRegex = /^[\(\)\s\-\+\d]{10,}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Event listener para o formulário
+        document.getElementById('cadastroForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Coletar dados do formulário
+            const formData = new FormData(this);
+            const data = {};
+
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+
+            // Validações
+            if (!data.nome || !data.email || !data.telefone || !data.interesse) {
+                alert('⚠️ Por favor, preencha todos os campos obrigatórios!');
+                return;
+            }
+
+            if (!validateEmail(data.email)) {
+                alert('⚠️ Por favor, insira um e-mail válido!');
+                return;
+            }
+
+            if (!validatePhone(data.telefone)) {
+                alert('⚠️ Por favor, insira um telefone válido!');
+                return;
+            }
+
+            // Animação do botão de envio
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.style.background = 'linear-gradient(45deg, #a5d6a7, #c8e6c9)';
+            submitBtn.disabled = true;
+
+            // Simulação de envio
+            setTimeout(() => {
+                alert('🌱 Cadastro realizado com sucesso!\n\n' +
+                    'Bem-vindo à comunidade GreenTech!\n\n' +
+                    'Dados cadastrados:\n' +
+                    '• Nome: ' + data.nome + '\n' +
+                    '• E-mail: ' + data.email + '\n' +
+                    '• Telefone: ' + data.telefone + '\n' +
+                    '• Interesse: ' + data.interesse + '\n\n' +
+                    'Em breve você receberá mais informações sobre nossas soluções sustentáveis!');
+
+                // Resetar formulário
+                this.reset();
+
+                // Restaurar botão
+                submitBtn.textContent = originalText;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+
+                // Voltar para a página inicial
+                showSection('home');
+            }, 2500);
+        });
+
+        // Event listener para fechar menu ao clicar fora
+        document.addEventListener('click', function (e) {
+            const navMenu = document.querySelector('.nav-menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Event listener para navegação por teclado
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        // Animações ao carregar a página
+        window.addEventListener('load', function () {
+            // Fade in inicial
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 1s ease';
+
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+
+            // Observer para animações dos cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.animation = 'slideIn 0.6s ease-out';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observar cards e outros elementos
+            document.querySelectorAll('.card, .overview-item, .quality-item').forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Função para adicionar efeitos de hover nos cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transition = 'all 0.4s ease';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transition = 'all 0.4s ease';
+            });
+        });
+    </script>
+</body>
+
+</html>
